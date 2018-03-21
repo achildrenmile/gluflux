@@ -1,0 +1,85 @@
+###
+# Copyright (c) 2015-2017 Mainflux
+## Mainflux is licensed under an Apache license, version 2.0 license.
+# All rights not explicitly granted in the Apache license, version 2.0 are reserved.
+# See the included LICENSE file for more details.
+###
+
+version: "3"
+
+services:
+  postgres:
+    image: registry.access.redhat.com/rhscl/postgresql-95-rhel7
+    container_name: mainflux-postgres
+    restart:
+      on-failure
+    environment:
+      POSTGRESQL_USER: mainflux
+      POSTGRESQL_PASSWORD: mainflux
+      POSTGRESQL_DATABASE: mainflux
+    ports:
+        - "5432:5432"
+
+  manager:
+    image: mainflux/manager:latest
+    container_name: mainflux-manager
+    expose:
+      - 8180
+    restart:
+      on-failure
+    environment:
+      MF_DB_HOST: postgres
+      MF_MANAGER_DB: mainflux
+      MF_MANAGER_PORT: 8180
+      MF_MANAGER_SECRET: test-secret
+    ports:
+        - "8180:8180"
+
+  nats:
+    image: nats:1.0.2
+    container_name: mainflux-nats
+    restart:
+      on-failure
+
+  normalizer:
+    image: mainflux/normalizer:latest
+    container_name: mainflux-normalizer
+    restart:
+      on-failure
+    expose:
+      - 8181
+    environment:
+      MF_NATS_URL: "nats://nats:4222"
+      MF_NORMALIZER_PORT: 8181
+    ports:
+        - "8180:8180"
+
+  http-adapter:
+    image: mainflux/http:latest
+    container_name: mainflux-http
+    depends_on:
+      - manager
+    restart:
+      on-failure
+    expose:
+      - 8182
+    environment:
+      MF_MANAGER_URL: "http://manager:8180"
+      MF_NATS_URL: "nats://nats:4222"
+      MF_HTTP_ADAPTER_PORT: 8182
+    ports:
+        - "8182:8182"
+
+  mqtt-adapter:
+    image: mainflux/mqtt-adapter:latest
+    container_name: mainflux-mqtt
+    depends_on:
+      - manager
+    restart:
+      on-failure
+    environment:
+      MQTT_ADAPTER_NATS_URL: "nats://nats:4222"
+      AUTH_URL: "http://manager"
+      AUTH_PORT: 8180
+    ports:
+      - "1883:1883"
