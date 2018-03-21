@@ -16,7 +16,6 @@ usage of Openshift router is sufficient
 ### Docker Compose
 ```
 $ COMPOSE_HTTP_TIMEOUT=300 docker-compose up
-
 ```
 This will ensure that all parts will start without any problems. You can also have a look at https://github.com/mainflux/mainflux/issues/179 which will give more explanation about this.
 
