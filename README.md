@@ -1,5 +1,5 @@
 # Gluflux 
-The idea is to find define a Mainflux configuration which runs in Kubernets and/or Openshift environments. 
+The idea is to find define a deployment configuration for mainflux which runs in Kubernets and/or Openshift environments as well as local via docker compose.
 
 ## Current status
 The docker-compose.yml holds the container information for the mainflux platform. 
