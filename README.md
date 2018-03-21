@@ -14,7 +14,10 @@ usage of Openshift router is sufficient
 
 ## Start
 ### Docker Compose
-```$ COMPOSE_HTTP_TIMEOUT=300 docker-compose up```
+```
+$ COMPOSE_HTTP_TIMEOUT=300 docker-compose up
+
+```
 This will ensure that all parts will start without any problems. You can also have a look at https://github.com/mainflux/mainflux/issues/179 which will give more explanation about this.
 
 ### Kubernetes or Openshift
@@ -24,7 +27,9 @@ First of all logon to the system. For openshift visit https://docs.openshift.com
 
 After you are logged in you can use following command in order to start the composition.
 
-```$ kompose up```
+```
+$ kompose up
+```
 
 
 
