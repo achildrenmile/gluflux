@@ -8,6 +8,7 @@ The docker-compose.yml holds the container information for the mainflux platform
 
 ## ToDo's
 * Define a HA Postgres configuration with persistant db storage
+* Define routes
 * Check if NGINX is needed in the composotion including the configuration and https or
 usage of Openshift router is sufficient 
 * Expose MQTT to outside world
