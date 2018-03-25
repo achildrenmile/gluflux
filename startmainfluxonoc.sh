@@ -14,6 +14,6 @@ oc new-project mainflux
 oc project mainflux
 kompose --provider openshift up
 sleep 10 #wait 10 seconds / assumption is that then all containers are started; better solution to be found
-oc create route edge --service=http-adapter #todo setting a secured route
-oc create route edge --service=manager #tod setting a secured route
+oc expose svc/http-adapter #todo setting a secured route on non dev systems with oc create route
+oc expose svc/manager #todo setting a secured route on non dev systems with oc create route
 oc expose dc mqtt-adapter --type=LoadBalancer --name=mqtt-ingress #todo exposing the mqtt secure; for dev purpose do portfarwarding 
