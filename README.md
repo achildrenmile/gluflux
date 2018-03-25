@@ -24,11 +24,16 @@ First of all logon to the system. For openshift visit https://docs.openshift.com
 
 After you are logged in you can use following command in order to start the composition.
 
-```$ kompose --provider penshift up```
+**Kubernetes**
+```$ kompose up```
 
-### Start and expose manager, http-adapter and mqtt-adapter services to the outside
-use follwing shell script
+**Openshift**
+```$ kompose --provider openshift up```
 
+
+### Start and expose manager, http-adapter and mqtt-adapter services to the outside on Openshift
+
+Start following script
 ```$ ./startmainfluxonoc.sh```
 
 **Note:** for using MQTT in minishift use portforwarding as the simple solution or configure the ingress IP as described here https://docs.openshift.com/container-platform/3.3/dev_guide/getting_traffic_into_cluster.html
