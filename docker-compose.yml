@@ -8,6 +8,20 @@
 version: "3"
 
 services:
+  
+  gluneon-mongodb:
+    image: registry.access.redhat.com/rhscl/mongodb-26-rhel7
+    container_name: gluneon-mongodb
+    restart:
+      on-failure
+    environment:
+      MONGODB_USER: gluneonmsg
+      MONGODB_PASSWORD: gluneonmsg
+      MONGODB_DATABASE: gluneonmsg
+      MONGODB_ADMIN_PASSWORD: gluneonmsg
+    ports:
+        - "27017:27017"
+        
   postgres:
     image: registry.access.redhat.com/rhscl/postgresql-95-rhel7
     container_name: mainflux-postgres
