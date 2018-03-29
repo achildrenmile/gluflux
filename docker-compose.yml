@@ -52,8 +52,12 @@ services:
   nats:
     image: nats:1.0.2
     container_name: mainflux-nats
+    expose:
+      - 4222
     restart:
       on-failure
+    ports: 
+        - "4222:4222"
 
   normalizer:
     image: mainflux/normalizer:latest
@@ -66,7 +70,7 @@ services:
       MF_NATS_URL: "nats://nats:4222"
       MF_NORMALIZER_PORT: 8181
     ports:
-        - "8180:8180"
+        - "8181:8181"
 
   http-adapter:
     image: mainflux/http:latest
