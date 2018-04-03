@@ -101,3 +101,17 @@ services:
       AUTH_PORT: 8180
     ports:
       - "1883:1883"
+
+  glunmsgwriter:
+    image: stralisolutions/gluneonmsgwriter:latest
+    container_name: glunmsgwriter
+    depends_on:
+      - nats
+    restart:
+      on-failure
+    environment:
+      ConnectionString: mongodb://admin:gluneonmsg@gluneon-mongodb:27017
+      Database: GluneonMessages
+      Nats: nats://nats:4222
+      UseTLSforMongo: 'false'
+    
